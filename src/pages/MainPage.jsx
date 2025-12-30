@@ -7,7 +7,7 @@ import {
   ImageWrapper,
   CoverImage,
 } from "../components/ui/Card";
-import { CARDS } from "../data/cards_data";
+import { CARDS } from "../data/CARDS_data";
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { LoginModal } from "../components/other/LoginModal";
