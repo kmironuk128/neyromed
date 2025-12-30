@@ -26,8 +26,8 @@ export const WechslerForm = () => {
   return (
     <>
       {SCORE_NAMES.map(code => (
-        <QuestionItem key={code} style={{marginBottom: '0'}}> 
-          <QuestionText>{subtestLabels[code] || code}</QuestionText>
+        <QuestionItem key={code} style={{margin: '0'}}> 
+          <QuestionText style={{margin: '0'}}>{subtestLabels[code] || code}</QuestionText>
           <Input
             type="number"
             id={code}

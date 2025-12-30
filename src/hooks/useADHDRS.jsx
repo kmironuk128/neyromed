@@ -5,7 +5,6 @@ import { getBaseFormData } from "../utils/dateAndAge";
 import { sendResultsEmail } from "../services/sendEmail";
 import { showQuickResult, showSuccess, showError } from '../utils/sweetAlert';
 
-
 export const useADHDRS = () => {
   const formRef = useRef(null);
   const [maxes, setMaxes] = useState(Array(18).fill(0));
@@ -117,7 +116,7 @@ export const useADHDRS = () => {
 
   const handleQuickResult = () => {
     const totals = calculateTotals();
-    showQuickResult('Швидкий результат ADHD-RS'    `
+    showQuickResult('Швидкий результат ADHD-RS',   `
 Неуважність: ${totals.result_inattention} з 27 балів
 Гіперактивність/імпульсивність: ${totals.result_hyperactivity} з 27 балів
 Загальний бал: ${totals.result_overall} з 54
