@@ -16,6 +16,11 @@ export const CARDS = [
       "Вендер-Ютська шкала оцінювання симптомів РДУГ в дитинстві (WURS-25)",
   },
   {
+    to: "/CAARS_short",
+    cover: "/img/img_11.png",
+    title: "CAARS-Самооцінка: Коротка версія (CAARS-O:S)",
+  },
+  {
     to: "/CAARS",
     cover: "/img/img_12.png",
     title: "CAARS-Самооцінка: Повна версія (CAARS-S:L)",

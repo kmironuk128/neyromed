@@ -10,6 +10,7 @@ import WURS from './pages/WURS';
 import ADHD_DIVA_5 from './pages/ADHD_DIVA_5';
 import CAARS from './pages/CAARS'
 import Wechsler from './pages/Wechsler';
+import CAARS_Small from './pages/CAARS_Small';
 import { AuthProvider } from './hooks/AuthProvider';
 import Page404 from './pages/Page404';
 
@@ -26,6 +27,7 @@ function App() {
           <Route path="/ADHD_DIVA_5" element={<ADHD_DIVA_5 />} />
           <Route path="/CAARS" element={<CAARS />} />
           <Route path="/Wechsler" element={<Wechsler />} />
+           <Route path="/CAARS_short" element={<CAARS_Small />} />
           <Route path="*" element={<Page404 />} />
         </Routes>
       </Router>

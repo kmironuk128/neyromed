@@ -168,3 +168,21 @@ export const getExpandedFormData = (formRef) => {
     formattedDate: getFormattedCurrentDate(),
   };
 };
+
+export const getInformantFormData = (formRef) => {
+  const form = formRef.current;
+  if (!form) {
+    console.warn("getInformantFormData: formRef is not attached");
+    return {};
+  }
+
+  const sexSelect = form.querySelector('[name="informant_sex"]');
+  const informant_sex = sexSelect?.value || "Невідомо";
+
+  return {
+    informant_name: form.informant_name?.value.trim() || "Невідомо",
+    informant_year: form.informant_year?.value.trim() || "Невідомо",
+    informant_sex,
+    informant_relation: form.informant_relation?.value.trim() || "Невідомо",
+  };
+};

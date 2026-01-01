@@ -21,7 +21,7 @@ export const ADHDRSQuestions = ({ maxes = [] }) => {
             </Subtitle>
 
             {questions.map((question, qIdx) => (
-              <div key={qIdx}>
+              <QuestionItem key={qIdx}>
                 <QuestionText>{question}</QuestionText>
                 <RadioGroup columns={4}>
                   {ANSWERS.map((value) => (
@@ -40,7 +40,7 @@ export const ADHDRSQuestions = ({ maxes = [] }) => {
                     </React.Fragment>
                   ))}
                 </RadioGroup>
-              </div>
+              </QuestionItem>
             ))}
 
             <SectionTitle>

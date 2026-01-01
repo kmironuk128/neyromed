@@ -3,13 +3,16 @@ import React from 'react';
 import { QuestionItem, QuestionText} from '../ui/QuestionItem';
 import {RadioGroup, HiddenRadio, RadioLabel} from '../ui/RadioGroup'
 import { ANSWERS, QUESTIONS } from '../../data/CAARS_data';
+import { QUESTIONS_SMALL } from '../../data/CAARS_Small_data';
 
-export const CAARSQuestions = () => {
+export const CAARSQuestions = ({size}) => {
+  const CURR_QUESTIONS = size === 'full' ? QUESTIONS : QUESTIONS_SMALL;
+
   return (
     <>
-      {QUESTIONS.map((question, index) => (
+      {CURR_QUESTIONS.map((question, index) => (
         <QuestionItem key={index}>
-          <QuestionText>{question}</QuestionText>
+          <QuestionText>{index + 1}. {question}</QuestionText>
           <RadioGroup columns={4} >
             {ANSWERS.map((answer, aIndex) => (
               <React.Fragment key={aIndex}>

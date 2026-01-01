@@ -12,7 +12,7 @@ export const QuestionItem = styled.li`
   border-radius: ${(props) => props.theme.borderRadius.md};
 
   @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
-    margin-bottom: ${(props) => props.theme.spacing.xxl};
+    margin-bottom: ${(props) => props.theme.spacing.lg};
   }
 `;
 
