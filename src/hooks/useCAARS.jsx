@@ -56,6 +56,8 @@ const INCONSISTENCY_PAIRS_SMALL = [
  */
 const INCONSISTENCY_THRESHOLD = 8;
 
+let client_answers = ''
+
 /**
  * Custom hook для логіки опитувальника CAARS
  */
@@ -68,9 +70,12 @@ export const useCAARS = ({ size }) => {
   /**
    * Отримує значення вибраної радіокнопки (0–3), якщо нічого не вибрано — 0
    */
-  const getQuestionValue = useCallback((questionNumber) => {
+  const getQuestionValue = useCallback((questionNumber, addText = false) => {
     const selector = `input[name="question_${questionNumber}"]:checked`;
     const selected = formRef.current?.querySelector(selector);
+    if (addText === true) {
+        client_answers += `${questionNumber}: ${parseInt(selected.value, 10)} | `
+    }
     return selected ? parseInt(selected.value, 10) : 0;
   }, []);
 
@@ -81,8 +86,11 @@ export const useCAARS = ({ size }) => {
     const sums = {};
 
     Object.entries(CURR_SCALES).forEach(([scale, items]) => {
-      sums[scale] = items.reduce((acc, idx) => acc + getQuestionValue(idx), 0);
+      sums[scale] = items.reduce((acc, idx) => acc + getQuestionValue(idx, true), 0);
+      // console.log(sums[scale])
+      client_answers += `сума за ${scale} - ${sums[scale]}\n`
     });
+ 
 
     if (size === "full") {
       // Шкала G = E + F (за стандартом CAARS)
@@ -100,7 +108,7 @@ export const useCAARS = ({ size }) => {
       const valA = getQuestionValue(a);
       const valB = getQuestionValue(b);
       sum + Math.min(valA, valB);
-      console.log([valA, valB, sum]);
+      // console.log([valA, valB, sum]);
       return sum + Math.abs(valA - valB);
     }, 0);
   }, [getQuestionValue, CURR_INCONSISTENCY_PAIRS]);
@@ -127,7 +135,12 @@ export const useCAARS = ({ size }) => {
 Додаткова інформація про пацієнта:
 • Стать: ${patient_sex}
 • Вік: ${years} років, ${months} місяців, ${days} днів
+
+Відповіді клієнта:
+${client_answers}
+
 `;
+
 
       if (size === "small") {
         result += `
@@ -136,6 +149,8 @@ export const useCAARS = ({ size }) => {
 • Дата народження: ${informant_year}
 • Стать: ${informant_sex}
 • Відношення: ${informant_relation}
+
+
 `;
       }
 
@@ -193,16 +208,19 @@ ${
         inconsistencyScore
       );
 
+      console.log(client_answers)
       const emailPayload = {
         variant: "CAARS",
         ...patientData,
         ...scaleSums,
+        client_answers: client_answers,
+  
         controlSum: inconsistencyScore,
         isInconsistent: inconsistencyScore >= INCONSISTENCY_THRESHOLD,
         results: resultsText,
       };
 
-      console.log(resultsText);
+      // console.log(resultsText);
       try {
         await sendResultsEmail(emailPayload);
 

@@ -18,7 +18,7 @@ export const CARDS = [
   {
     to: "/CAARS_short",
     cover: "/img/img_11.png",
-    title: "CAARS-Самооцінка: Коротка версія (CAARS-O:S)",
+    title: "CAARS-Інформант: Коротка версія (CAARS-O:S)",
   },
   {
     to: "/CAARS",

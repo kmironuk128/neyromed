@@ -14,7 +14,7 @@ const CAARS_Small = () => {
 
   return (
     <Container>
-      <Title>CAARS-Самооцінка: Інформант - Коротка версія (CAARS-O:S)</Title>
+      <Title>CAARS-Інформант: Коротка версія (CAARS-O:S)</Title>
 
       <Navigation isBottom={false} />
 
