@@ -208,7 +208,7 @@ ${
         inconsistencyScore
       );
 
-      console.log(client_answers)
+      // console.log(client_answers)
       const emailPayload = {
         variant: "CAARS",
         ...patientData,

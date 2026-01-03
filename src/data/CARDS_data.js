@@ -16,15 +16,21 @@ export const CARDS = [
       "Вендер-Ютська шкала оцінювання симптомів РДУГ в дитинстві (WURS-25)",
   },
   {
-    to: "/CAARS_short",
-    cover: "/img/img_11.png",
-    title: "CAARS-Інформант: Коротка версія (CAARS-O:S)",
+    to: "CAT-Q",
+    cover: "/img/img_15.png",
+    title: "Опитувальник маскування аутичних рис (CAT-Q)",
   },
   {
     to: "/CAARS",
     cover: "/img/img_12.png",
     title: "CAARS-Самооцінка: Повна версія (CAARS-S:L)",
   },
+  {
+    to: "/CAARS_short",
+    cover: "/img/img_11.png",
+    title: "CAARS-Інформант: Коротка версія (CAARS-O:S)",
+  },
+
   {
     to: "/ADHD_DIVA_5",
     cover: "/img/img_9.png",
@@ -35,5 +41,4 @@ export const CARDS = [
     cover: "/img/img_2.png",
     title: "Тест Векслера для дітей",
   },
-
 ];

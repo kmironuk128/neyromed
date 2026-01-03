@@ -9,7 +9,7 @@ import { CAARSQuestions } from "../components/questionnaire/CAARSQuestions";
 import { useCAARS } from "../hooks/useCAARS";
 
 const CAARS = () => {
-  const { formRef, handleSubmit, handleQuickResult } = useCAARS({
+  const { formRef, handleSubmit } = useCAARS({
     size: "full",
   });
 
@@ -22,7 +22,6 @@ const CAARS = () => {
       <QuestionnaireForm
         formRef={formRef}
         onSubmit={handleSubmit}
-        onQuickResult={handleQuickResult}
         bothButtons={false}
       >
         <PatientInfo includeSex={true} />

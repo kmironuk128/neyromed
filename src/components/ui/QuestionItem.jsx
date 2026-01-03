@@ -10,10 +10,6 @@ export const QuestionList = styled.ul`
 export const QuestionItem = styled.li`
   padding: ${(props) => props.theme.spacing.md};
   border-radius: ${(props) => props.theme.borderRadius.md};
-
-  @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
-    margin-bottom: ${(props) => props.theme.spacing.lg};
-  }
 `;
 
 export const QuestionText = styled.p`
@@ -27,6 +23,7 @@ export const QuestionText = styled.p`
   }
 
   @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
+    margin: ${(props) => props.theme.spacing.xxl} 0 ${(props) => props.theme.spacing.lg};
     font-size: ${(props) => props.theme.mobileFont.sm};
   }
 `;

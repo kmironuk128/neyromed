@@ -10,7 +10,7 @@ import { CAARSQuestions } from "../components/questionnaire/CAARSQuestions";
 import { useCAARS } from "../hooks/useCAARS";
 
 const CAARS_Small = () => {
-  const { formRef, handleSubmit, handleQuickResult } = useCAARS({ size: "small" });
+  const { formRef, handleSubmit } = useCAARS({ size: "small" });
 
   return (
     <Container>
@@ -21,7 +21,6 @@ const CAARS_Small = () => {
       <QuestionnaireForm
         formRef={formRef}
         onSubmit={handleSubmit}
-        onQuickResult={handleQuickResult}
         bothButtons={false}
       >
         <SectionTitle><strong>Інформація про пацієнта</strong></SectionTitle>

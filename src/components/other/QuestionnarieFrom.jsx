@@ -15,7 +15,9 @@ export const QuestionnaireForm = ({
     <form ref={formRef} onSubmit={onSubmit}>
       {children}
 
-      <Label htmlFor="optional_text">Додатковий текст:</Label>
+      <Label style={{ marginTop: "3rem" }} htmlFor="optional_text">
+        Додатковий текст:
+      </Label>
       <Textarea id="optional_text" name="optional_text" />
 
       {bothButtons && (
