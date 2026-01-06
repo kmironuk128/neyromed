@@ -143,10 +143,10 @@ ${client_answers}
         await sendResultsEmail(emailPayload);
         formRef.current?.reset();
         showSuccess(
-          "Результати CAARS успішно надіслано на email адміністратора."
+          "Результати CAT-Q успішно надіслано на email адміністратора."
         );
       } catch (error) {
-        console.error("Помилка при відправці результатів CAARS:", error);
+        console.error("Помилка при відправці результатів CAT-Q:", error);
         showError(
           "Виникла помилка при відправці результатів. Спробуйте ще раз."
         );
