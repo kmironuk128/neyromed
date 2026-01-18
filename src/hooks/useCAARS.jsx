@@ -2,7 +2,7 @@
 import { useRef, useCallback } from "react";
 import { getExpandedFormData, getInformantFormData } from "../utils/dateAndAge";
 import { sendResultsEmail } from "../services/sendEmail";
-import { showSuccess, showError } from "../utils/sweetAlert";
+import { showSuccess, showError, checkAllAnswered } from "../utils/sweetAlert";
 
 /**
  * Конфігурація шкал CAARS (Conners' Adult ADHD Rating Scales)
@@ -56,7 +56,7 @@ const INCONSISTENCY_PAIRS_SMALL = [
  */
 const INCONSISTENCY_THRESHOLD = 8;
 
-let client_answers = ''
+let client_answers = "";
 
 /**
  * Custom hook для логіки опитувальника CAARS
@@ -74,7 +74,7 @@ export const useCAARS = ({ size }) => {
     const selector = `input[name="question_${questionNumber}"]:checked`;
     const selected = formRef.current?.querySelector(selector);
     if (addText === true) {
-        client_answers += `${questionNumber}: ${parseInt(selected.value, 10)} | `
+      client_answers += `${questionNumber}: ${parseInt(selected.value, 10)} | `;
     }
     return selected ? parseInt(selected.value, 10) : 0;
   }, []);
@@ -86,11 +86,13 @@ export const useCAARS = ({ size }) => {
     const sums = {};
 
     Object.entries(CURR_SCALES).forEach(([scale, items]) => {
-      sums[scale] = items.reduce((acc, idx) => acc + getQuestionValue(idx, true), 0);
+      sums[scale] = items.reduce(
+        (acc, idx) => acc + getQuestionValue(idx, true),
+        0
+      );
       // console.log(sums[scale])
-      client_answers += `сума за ${scale} - ${sums[scale]}\n`
+      client_answers += `сума за ${scale} - ${sums[scale]}\n`;
     });
- 
 
     if (size === "full") {
       // Шкала G = E + F (за стандартом CAARS)
@@ -140,7 +142,6 @@ export const useCAARS = ({ size }) => {
 ${client_answers}
 
 `;
-
 
       if (size === "small") {
         result += `
@@ -197,6 +198,13 @@ ${
     async (e) => {
       e.preventDefault();
 
+      try {
+        const questions_count = size === "small" ? 26 : 66;
+        checkAllAnswered(formRef, questions_count);
+      } catch (error) {
+        return
+      }
+
       const patientData = getExpandedFormData(formRef);
       const informantData = getInformantFormData(formRef);
       const scaleSums = calculateScaleSums();
@@ -214,7 +222,7 @@ ${
         ...patientData,
         ...scaleSums,
         client_answers: client_answers,
-  
+
         controlSum: inconsistencyScore,
         isInconsistent: inconsistencyScore >= INCONSISTENCY_THRESHOLD,
         results: resultsText,
@@ -222,9 +230,6 @@ ${
 
       // console.log(resultsText);
       try {
-        const questions_count = size === "small" ? 26 : 66;
-        checkAllAnswered(formRef, questions_count);
-
         await sendResultsEmail(emailPayload);
 
         formRef.current?.reset();
