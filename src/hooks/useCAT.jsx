@@ -99,6 +99,13 @@ export const useCAT = () => {
     async (e) => {
       e.preventDefault();
 
+      try {
+        const questions_count = 25;
+        checkAllAnswered(formRef, questions_count);
+      } catch (error) {
+        return
+      }
+
       const patientData = getExpandedFormData(formRef);
       const scores = calculateScores();
 
@@ -140,9 +147,6 @@ ${client_answers}
 
       // console.log(resultsText);
       try {
-
-        checkAllAnswered(formRef, 25);
-
         await sendResultsEmail(emailPayload);
 
         formRef.current?.reset();
