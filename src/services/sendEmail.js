@@ -14,5 +14,6 @@ export const sendResultsEmail = async (results) => {
     console.log("Результати успішно надіслано на email");
   } catch (error) {
     console.error("Помилка відправки email:", error);
+    throw new Error(`Виникла помилка при надісланні результатів`);
   }
 };

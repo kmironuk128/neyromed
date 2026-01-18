@@ -2,7 +2,7 @@
 import { useRef, useCallback } from "react";
 import { getExpandedFormData } from "../utils/dateAndAge";
 import { sendResultsEmail } from "../services/sendEmail";
-import { showSuccess, showError } from "../utils/sweetAlert";
+import { showSuccess, showError, checkAllAnswered } from "../utils/sweetAlert";
 
 const CAT_Q_SUBSCALES = {
   compensation: [1, 4, 5, 8, 11, 14, 17, 20, 23], // 9 питань
@@ -55,7 +55,7 @@ export const useCAT = () => {
       value = REVERSED_MAP[value] || value;
     }
 
-    client_answers += `${questionNumber}: ${value} | `
+    client_answers += `${questionNumber}: ${value} | `;
 
     return value;
   }, []);
@@ -140,7 +140,11 @@ ${client_answers}
 
       // console.log(resultsText);
       try {
+
+        checkAllAnswered(formRef, 25);
+
         await sendResultsEmail(emailPayload);
+
         formRef.current?.reset();
         showSuccess(
           "Результати CAT-Q успішно надіслано на email адміністратора."

@@ -222,6 +222,9 @@ ${
 
       // console.log(resultsText);
       try {
+        const questions_count = size === "small" ? 26 : 66;
+        checkAllAnswered(formRef, questions_count);
+
         await sendResultsEmail(emailPayload);
 
         formRef.current?.reset();
