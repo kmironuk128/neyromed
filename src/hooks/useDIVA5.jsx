@@ -69,7 +69,7 @@ export const useDIVA5 = () => {
     }
     
     return parts.length > 0 
-      ? `ТАК (${parts.join(", ")})` 
+      ? `ТАК (${parts.join("; ")})` 
       : "ТАК";
   };
 
